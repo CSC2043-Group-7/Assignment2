@@ -1,13 +1,9 @@
-<?php
-session_start();
-?>
-
 <html>
     <head>
         <title>Seven Festival</title>
    
         
-        <link href="home.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/d6f6f144c6.js" crossorigin="anonymous"></script>
         <meta charset="UTF-8">
@@ -24,24 +20,14 @@ session_start();
                     <img src='img/Sevenlogo.png'> 
                 </div>
                 <ul class="main-nav">
-                    <li class='active'><a href="index.php"> Home </a></li>
+                    <li><a href="index.php"> Home </a></li>
                     <li><a href="shows.php"> Shows </a></li>
-                    <li><a href="test.php"> Venue </a></li>
+                    <li class='active'><a href="venue.php"> Venue </a></li>
                     <li><a href="login.php"> Login </a></li>
                     
             
             </div>
-            <h1>Seven Festival 2020</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Curabitur ornare augue a est dictum, eget hendrerit nibh mollis.
-                Aliquam erat volutpat. Suspendisse imperdiet pharetra imperdiet.
-                Vivamus in nisi consectetur, posuere mi sit amet, eleifend dui. 
-                Nulla at pulvinar eros, vel auctor mi. Integer id ipsum non diam
-                laoreet faucibus. Etiam et turpis vel ipsum suscipit accumsan. 
-                Vestibulum a varius justo, ac semper erat. Nulla in nulla eu 
-                ligula egestas porttitor id vel lectus.</p>
-
-            </div>
+            
         </header>
         <!-- End of nav bar code -->
         
@@ -88,3 +74,4 @@ session_start();
     </body>
     
 </html>
+
