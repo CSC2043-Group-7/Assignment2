@@ -1,9 +1,23 @@
+<?php
+
+include('connections/conn.php');
+
+$queryread = "SELECT * FROM galleryimages";
+$resultread = $conn -> query($queryread);
+
+if(!resultread){
+	echo $conn -> error;
+}
+
+?>
+
+
 <html>
     <head>
         <title>Seven Festival</title>
    
         
-        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/venue.css" rel="stylesheet" type="text/css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/d6f6f144c6.js" crossorigin="anonymous"></script>
         <meta charset="UTF-8">
@@ -27,11 +41,33 @@
                     
             
             </div>
+			<!-- End of nav bar code -->
+			
+			<div id='container'>
+
+    <?php
+
+    //get image names from table and display
+   
+     
+      while($row2 = $resultread->fetch_assoc()){
+
+        $galimg = $row2["imgname"]; 
+        $galdes = $row2["imgdescript"];
+    
+        echo "<div class='box'> 
+                $galdes <img src='gallery/$galimg' height='250px'/> 
+              </div>";
+            }           
+         
+    ?>  
+    </div>
             
         </header>
-        <!-- End of nav bar code -->
+        
         
     
+
         
         <!-- Start of footer code -->
         <hr>
