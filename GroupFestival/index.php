@@ -28,14 +28,9 @@
             
             </div>
             <h1>Seven Festival 2020</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Curabitur ornare augue a est dictum, eget hendrerit nibh mollis.
-                Aliquam erat volutpat. Suspendisse imperdiet pharetra imperdiet.
-                Vivamus in nisi consectetur, posuere mi sit amet, eleifend dui. 
-                Nulla at pulvinar eros, vel auctor mi. Integer id ipsum non diam
-                laoreet faucibus. Etiam et turpis vel ipsum suscipit accumsan. 
-                Vestibulum a varius justo, ac semper erat. Nulla in nulla eu 
-                ligula egestas porttitor id vel lectus.</p>
+            <p>The greatest festival is back for 2020!
+			 Be sure to check the events to see whos playing and reserve your tickets
+			 for this years festival.</p>
 
             </div>
         </header>
