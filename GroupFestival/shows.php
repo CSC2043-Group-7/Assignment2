@@ -1,3 +1,20 @@
+<?php
+include("connections/conn.php");
+
+$allShowsQuery = "SELECT shows.id, shows.show_name, shows.date, shows.start_time, shows.end_time, shows.ticket_price, show_categories.category, venues.venue
+                  FROM shows
+                  INNER JOIN show_categories
+                  ON shows.category_id = show_categories.id
+                  INNER JOIN venues
+                  ON shows.venue_id = venues.id";
+
+$allShowsResult = $conn -> query($allShowsQuery);
+
+if (!$allShowsResult) {
+    echo $conn -> error;
+}
+
+?>
 <html>
     <head>
         <title>Seven Festival</title>
@@ -24,12 +41,166 @@
                     <li class='active'><a href="shows.php"> Shows </a></li>
                     <li><a href="venue.php"> Venue </a></li>
                     <li><a href="login.php"> Login </a></li>
-                    
+                </ul>    
             
             </div>
+            </div>
             
+            <!-- Start of dropdown code -->
+            <div>
+                <form method="POST" action="shows.php">
+                    <div>
+
+                        <p>
+                        <label class="p">Category</label>
+                        <select name="category">
+                            <option>All Shows</option>
+                            <?php
+                                $getCategoriesQuery = "SELECT * FROM show_categories";
+
+                                $getCategoriesResult = $conn -> query($getCategoriesQuery);
+
+                                if (!$getCategoriesResult) {
+                                    $conn -> error;
+                                }
+
+                                while ($row = $getCategoriesResult -> fetch_assoc()) {
+
+                                    $categoryName = $row["category"];
+                                    $categoryID = $row["id"];
+
+                                    echo "<option value='$categoryID'>$categoryName</option>";
+                                    
+                                }
+                            ?>
+                        </select>
+
+                        <label class="p">Venue</label>
+                        <select name="venue">
+                            <option>All Venues</option>
+                            <?php
+                                $getVenuesQuery = "SELECT * FROM venues";
+
+                                $getVenuesResult = $conn -> query($getVenuesQuery);
+
+                                if (!$getVenuesResult) {
+                                    $conn -> error;
+                                }
+
+                                while ($row2 = $getVenuesResult -> fetch_assoc()) {
+
+                                    $venueName = $row2["venue"];
+                                    $venueID = $row2["id"];
+
+                                    echo "<option value='$venueID'>$venueName</option>";
+                                    
+                                } 
+                            ?>
+                        </select>
+
+                        <input type="submit" value="GO" name="searchevents">
+                        </p>
+
+                    </div>    
+
+                </form>
+            </div>
+            <!-- End of dropdown code -->
+            
+            <!-- Start of body code -->
+            <div class="container">
+                
+                
+                <?php
+                
+                    if (!isset($_POST["searchevents"] )) {
+                        
+                        while ($row3 = $allShowsResult -> fetch_assoc()) {
+                            
+                            $showID = $row3["id"];
+                            $showName = $row3["show_name"];
+                            $showDate = $row3["date"];
+                            $startTime = $row3["start_time"];
+                            $endTime = $row3["end_time"];
+                            $showPrice = $row3["ticket_price"];
+                            $showCategory = $row3["category"];
+                            $showVenue = $row3["venue"];
+                            
+                            echo "<a href='lineup.php?showID=$showID'>
+                                    <h1>$showName</h1>
+                                    <p>Category: $showCategory Venue: $showVenue <br>
+                                       Date: $showDate <br>
+                                       Begins: $startTime Ends: $endTime <br>
+                                       Ticket Price: £$showPrice
+                                    </p>
+                                  </a>";
+                        }
+                    } else if (isset($_POST["searchevents"]) && $_POST["category"] && $_POST["venue"]) {
+                        
+                        $whereClause = "";
+                        
+                        $category = $_POST["category"]; 
+                        if ($category == "All Shows") {
+                            $category = "";
+                        } else {
+                            $whereClause .= "WHERE show_categories.id = '$category'";
+                        }
+                        
+                        $venue = $_POST["venue"];
+                        if ($venue == "All Venues") {
+                            $venue = "";
+                        } else {
+                            if( $whereClause == null || $whereClause=="") {
+                                $whereClause .= "WHERE venues.id = '$venue'";
+                            } else {
+                                $whereClause .= "AND venues.id = '$venue'";
+                            }
+                        }
+                        
+                            $selectShowQuery = "SELECT shows.id, shows.show_name, shows.date, shows.start_time, shows.end_time, shows.ticket_price, show_categories.category, venues.venue
+                                                FROM shows
+                                                INNER JOIN show_categories
+                                                ON shows.category_id = show_categories.id
+                                                INNER JOIN venues
+                                                ON shows.venue_id = venues.id
+                                                ";
+
+                            $selectShowQuery .= $whereClause;
+                            
+                            $selectShowResult = $conn -> query($selectShowQuery);
+
+                            if (!$selectShowResult) {
+                                echo $conn -> error;
+                            }
+
+                            while ($row4 = $selectShowResult -> fetch_assoc()) {
+
+                                $showID = $row4["id"];
+                                $showName = $row4["show_name"];
+                                $showDate = $row4["date"];
+                                $startTime = $row4["start_time"];
+                                $endTime = $row4["end_time"];
+                                $showPrice = $row4["ticket_price"];
+                                $showCategory = $row4["category"];
+                                $showVenue = $row4["venue"];
+
+                            echo "<a href='lineup.php?showID=$showID'>
+                                    <h1>$showName</h1>
+                                    <p>Category: $showCategory Venue: $showVenue <br>
+                                       Date: $showDate <br>
+                                       Begins: $startTime Ends: $endTime <br>
+                                       Ticket Price: £$showPrice
+                                    </p>
+                                  </a>";
+                            }
+                        }
+                        
+                ?>
+            </div>
+            <!-- End of body code -->
         </header>
         <!-- End of nav bar code -->
+        
         
     
         
