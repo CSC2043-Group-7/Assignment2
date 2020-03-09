@@ -61,7 +61,7 @@ if (!$allShowsResult) {
                                 $getCategoriesResult = $conn -> query($getCategoriesQuery);
 
                                 if (!$getCategoriesResult) {
-                                    $conn -> error;
+                                    echo $conn -> error;
                                 }
 
                                 while ($row = $getCategoriesResult -> fetch_assoc()) {
@@ -84,7 +84,7 @@ if (!$allShowsResult) {
                                 $getVenuesResult = $conn -> query($getVenuesQuery);
 
                                 if (!$getVenuesResult) {
-                                    $conn -> error;
+                                    echo $conn -> error;
                                 }
 
                                 while ($row2 = $getVenuesResult -> fetch_assoc()) {
@@ -108,7 +108,7 @@ if (!$allShowsResult) {
             <!-- End of dropdown code -->
             
             <!-- Start of body code -->
-            <div class="container">
+            <div id="container">
                 
                 
                 <?php
@@ -127,12 +127,13 @@ if (!$allShowsResult) {
                             $showVenue = $row3["venue"];
                             
                             echo "<a href='lineup.php?showID=$showID'>
-                                    <h1>$showName</h1>
-                                    <p>Category: $showCategory Venue: $showVenue <br>
-                                       Date: $showDate <br>
-                                       Begins: $startTime Ends: $endTime <br>
-                                       Ticket Price: £$showPrice
-                                    </p>
+                                    <div class='box'>
+                                        $showName
+                                        Category: $showCategory Venue: $showVenue <br>
+                                        Date: $showDate <br>
+                                        Begins: $startTime Ends: $endTime <br>
+                                        Ticket Price: £$showPrice <br>
+                                    </div>
                                   </a>";
                         }
                     } else if (isset($_POST["searchevents"]) && $_POST["category"] && $_POST["venue"]) {
@@ -185,12 +186,13 @@ if (!$allShowsResult) {
                                 $showVenue = $row4["venue"];
 
                             echo "<a href='lineup.php?showID=$showID'>
-                                    <h1>$showName</h1>
-                                    <p>Category: $showCategory Venue: $showVenue <br>
-                                       Date: $showDate <br>
-                                       Begins: $startTime Ends: $endTime <br>
-                                       Ticket Price: £$showPrice
-                                    </p>
+                                    <div class='box'>
+                                        $showName
+                                        Category: $showCategory Venue: $showVenue <br>
+                                        Date: $showDate <br>
+                                        Begins: $startTime Ends: $endTime <br>
+                                        Ticket Price: £$showPrice <br>
+                                    </div>
                                   </a>";
                             }
                         }

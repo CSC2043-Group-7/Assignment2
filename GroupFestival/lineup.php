@@ -18,6 +18,18 @@ if (!$selectedShowResult) {
     echo $conn -> error;
 }
 
+$performersQuery = "SELECT performer_details.performer_name, performer_details.performer_description, performances.start_time, performances.end_time
+                    FROM performer_details
+                    INNER JOIN performances
+                    ON performer_details.id = performances.performer_id 
+                    WHERE performances.show_id = $selectedShow";
+
+$performersResult = $conn -> query($performersQuery);
+
+if (!$performersResult) {
+    echo $conn -> error;
+}
+
 ?>
 <html>
     <head>
@@ -49,10 +61,6 @@ if (!$selectedShowResult) {
             </div>
             </div>
             
-        </header>
-        <!-- End of nav bar code -->
-        
-        <section>
             <div>
                 <?php
                 
@@ -69,20 +77,42 @@ if (!$selectedShowResult) {
                     $showCategory = $row["category"];
                     $showVenue = $row["venue"];
                     
-                    echo "<img src='$showImage'>
-                          <h1>$showName</h1>
-                          <p>Category: $showCategory Venue: $showVenue <br>
-                             $showDesc <br>
-                             Date: $showDate <br>
-                             Begins: $startTime Ends: $endTime <br>
-                             Ticket Price: £$showPrice
-                          </p>";
+                    echo "<div class='box'>
+                            <img src='$showImage' height='250px'>
+                          </div>
+                          <div class='box'>
+                            $showName
+                            Category: $showCategory Venue: $showVenue <br>
+                            Date: $showDate <br>
+                            Begins: $startTime Ends: $endTime <br>
+                            Ticket Price: £$showPrice <br>
+                          </div>";
+                }
+                
+                while ($row2 = $performersResult -> fetch_assoc()) {
+                    
+                    $performerName = $row2["performer_name"];
+                    $performerDesc = $row2["performer_description"];
+                    $performerStartTime = $row2["start_time"];
+                    $performerEndTime = $row2["end_time"];
+                    
+                    echo "<div class='box'>
+                            $performerName <br>
+                            $performerDesc <br>
+                            $performerStartTime - $performerEndTime
+                          </div>";
                 }
                 
                 ?>
             </div>
             
-        </section>
+        </header>
+        <!-- End of nav bar code -->
+        
+       
+            
+            
+        
     
         
         <!-- Start of footer code -->
