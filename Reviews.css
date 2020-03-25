@@ -1,0 +1,26 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 80px;
+    text-align: center;
+    margin-top: 50px;
+}
+}
+
+textarea {
+   width: 300px;
+   margin-left: 40%;
+   font-size: 18px;
+   border-radius: 2px;
+   border-color: #fff;
+}
+.txtb{
+     margin-left: 45%;
+}
+
+

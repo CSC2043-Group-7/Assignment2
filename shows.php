@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("connections/conn.php");
 
 $allShowsQuery = "SELECT shows.id, shows.show_name, shows.date, shows.start_time, shows.end_time, shows.ticket_price, show_categories.category, venues.venue
                   FROM shows
@@ -21,6 +21,7 @@ if (!$allShowsResult) {
    
         
         <link href="css/style.css" rel="stylesheet" type="text/css">
+
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/d6f6f144c6.js" crossorigin="anonymous"></script>
         <meta charset="UTF-8">
@@ -100,7 +101,7 @@ if (!$allShowsResult) {
 
                         <input type="submit" value="GO" name="searchevents">
                         </p>
-
+                         <a type button href="Reviews.php">Check out show reviews!</a>
                     </div>    
 
                 </form>
@@ -198,7 +199,9 @@ if (!$allShowsResult) {
                         }
                         
                 ?>
+                
             </div>
+            
             <!-- End of body code -->
         </header>
         <!-- End of nav bar code -->
